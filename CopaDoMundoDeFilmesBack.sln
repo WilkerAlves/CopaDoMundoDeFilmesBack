@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30517.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{687608F9-DD57-406E-9C76-E7FD95161E71}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "service", "service", "{C10BFCEF-B1F3-4E9C-82EB-E895D5337D3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopaDoMundoDeFilmes", "CopaDoMundoDeFilmes\CopaDoMundoDeFilmes.csproj", "{3FFEC3D9-B087-4A7C-B2F8-C682157F2A0B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3FFEC3D9-B087-4A7C-B2F8-C682157F2A0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FFEC3D9-B087-4A7C-B2F8-C682157F2A0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FFEC3D9-B087-4A7C-B2F8-C682157F2A0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FFEC3D9-B087-4A7C-B2F8-C682157F2A0B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C10BFCEF-B1F3-4E9C-82EB-E895D5337D3A} = {687608F9-DD57-406E-9C76-E7FD95161E71}
+		{3FFEC3D9-B087-4A7C-B2F8-C682157F2A0B} = {C10BFCEF-B1F3-4E9C-82EB-E895D5337D3A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {12C7EB1C-36A7-421A-B9BF-7C895E119F68}
+	EndGlobalSection
+EndGlobal
