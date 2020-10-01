@@ -28,9 +28,9 @@ namespace CopaDoMundoDeFilmes.Controllers
 
         [HttpPost]
         [Route("/movies")]
-        public async Task<IActionResult> Post(List<Movie> movies)
+        public IActionResult Post(List<Movie> movies)
         {
-            if (movies.Count != 8) return BadRequest("invalid quantity");
+            if (movies.Count != QtyMaximum) return BadRequest("invalid quantity");
             var result = _moviesWorldCupService.GeneratedCup(movies);
             return Ok(result);
         }

@@ -33,24 +33,22 @@ namespace CopaDoMundoDeFilmes.services
 
         public List<Movie> GeneratedCup(List<Movie> movies)
         {
-            var movies_order =  movies.OrderBy(m => m.Titulo).ToList();
+            var moviesOrder = OrderMovies(movies);
 
-            var resultQuartas = QuartasDeFinal(movies_order);
+            var resultQuarterFinals = QuarterFinals(moviesOrder);
 
-            var resultSemi = SemiFinal(resultQuartas);
+            var resultSemiFinal = SemiFinal(resultQuarterFinals);
 
-            if (resultSemi[0].Nota > resultSemi[1].Nota)
-            {
-                return new List<Movie> { resultSemi[0], resultSemi[1] };
-            }
-            else
-            {
-                return new List<Movie> { resultSemi[1], resultSemi[0] };
-            }
+            return Final(resultSemiFinal);
 
         }
 
-        private List<Movie> QuartasDeFinal(List<Movie> movies)
+        public List<Movie> OrderMovies(List<Movie> movies)
+        {
+            return movies.OrderBy(m => m.Titulo).ToList();
+        }
+
+        public List<Movie> QuarterFinals(List<Movie> movies)
         {
             var indexFirst = 0;
             var indexLast = movies.Count -1;
@@ -59,14 +57,14 @@ namespace CopaDoMundoDeFilmes.services
             {
                 var m1 = movies[indexFirst];
                 var m2 = movies[indexLast];
-                resultList.Add(Vencedor(m1, m2));
+                resultList.Add(Champion(m1, m2));
                 indexLast--;
                 indexFirst++;
             }
             return resultList;
         }
 
-        private List<Movie> SemiFinal(List<Movie> movies)
+        public List<Movie> SemiFinal(List<Movie> movies)
         {
             var indexFirst = 0;
             List<Movie> resultList = new List<Movie>();
@@ -75,13 +73,25 @@ namespace CopaDoMundoDeFilmes.services
                 var adversario = indexFirst + 1;
                 var m1 = movies[indexFirst];
                 var m2 = movies[adversario];
-                resultList.Add(Vencedor(m1, m2));
+                resultList.Add(Champion(m1, m2));
                 indexFirst = adversario + 1;
             }
             return resultList;
         }
 
-        private Movie Vencedor(Movie m1, Movie m2)
+        public List<Movie> Final(List<Movie> movies)
+        {
+            if (movies[0].Nota > movies[1].Nota)
+            {
+                return new List<Movie> { movies[0], movies[1] };
+            }
+            else
+            {
+                return new List<Movie> { movies[1], movies[0] };
+            }
+        }
+
+        public Movie Champion(Movie m1, Movie m2)
         {
             if (m1.Nota > m2.Nota)
             {
