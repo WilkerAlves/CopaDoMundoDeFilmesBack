@@ -11,11 +11,13 @@ namespace CopaDoMundoDeFilmesTest
 {
     public class MoviesTest
     {
-        [Fact(DisplayName = "Ordenar filmes por ordem alfabetica")]
-        public void OrderMovies()
+        private readonly List<Movie> _movies;
+        private readonly MoviesWorldCupService _service;
+
+        public MoviesTest()
         {
-            // Arrange
-            List<Movie> movies = new List<Movie>
+            _service = new MoviesWorldCupService(new HttpClient());
+            _movies = new List<Movie>
             {
                 new Movie
                 {
@@ -74,9 +76,17 @@ namespace CopaDoMundoDeFilmesTest
                     Nota = 7.9
                 }
             };
-            var service = new MoviesWorldCupService(new HttpClient());
+        }
+
+
+        [Fact(DisplayName = "Ordenar filmes por ordem alfabetica")]
+        public void OrderMovies()
+        {
+            // Arrange
+            
+
             // Act
-            var result = service.OrderMovies(movies);
+            var result = _service.OrderMovies(_movies);
 
             // Assert
             Assert.Equal("tt5463162", result[0].Id);
@@ -93,70 +103,10 @@ namespace CopaDoMundoDeFilmesTest
         public void GeneratedCup_QuarterFinals()
         {
             // Arrange
-            List<Movie> movies = new List<Movie>
-            {
-                new Movie
-                {
-                    Id = "tt3606756",
-                    Titulo = "Os Incríveis 2",
-                    Ano = 2018,
-                    Nota = 8.5
-                },
-                new Movie
-                {
-                    Id = "tt4881806",
-                    Titulo = "Jurassic World: Reino Ameaçado",
-                    Ano = 2018,
-                    Nota = 6.7
-                },
-                new Movie
-                {
-                    Id = "tt5164214",
-                    Titulo = "Oito Mulheres e um Segredo",
-                    Ano = 2018,
-                    Nota = 6.3
-                },
-                new Movie
-                {
-                    Id = "tt7784604",
-                    Titulo = "Hereditário",
-                    Ano = 2018,
-                    Nota = 7.8
-                },
-                new Movie
-                {
-                    Id = "tt4154756",
-                    Titulo = "Vingadores: Guerra Infinita",
-                    Ano = 2018,
-                    Nota = 8.8
-                },
-                new Movie
-                {
-                    Id = "tt5463162",
-                    Titulo = "Deadpool 2",
-                    Ano = 2018,
-                    Nota = 8.1
-                },
-                new Movie
-                {
-                    Id = "tt3778644",
-                    Titulo = "Han Solo: Uma História Star Wars",
-                    Ano = 2018,
-                    Nota = 7.2
-                },
-                new Movie
-                {
-                    Id = "tt3501632",
-                    Titulo = "Thor: Ragnarok",
-                    Ano = 2018,
-                    Nota = 7.9
-                }
-            };
-            var service = new MoviesWorldCupService(new HttpClient());
-            var moviesOrder = service.OrderMovies(movies);
+            var moviesOrder = _service.OrderMovies(_movies);
 
             // Act
-            var result = service.QuarterFinals(moviesOrder);
+            var result = _service.QuarterFinals(moviesOrder);
 
             // Assert
             var m1 = result.FirstOrDefault(m => m.Id == "tt4154756");
@@ -175,76 +125,16 @@ namespace CopaDoMundoDeFilmesTest
         public void GeneratedCup_SemiFinal()
         {
             // Arrange
-            List<Movie> movies = new List<Movie>
-            {
-                new Movie
-                {
-                    Id = "tt3606756",
-                    Titulo = "Os Incríveis 2",
-                    Ano = 2018,
-                    Nota = 8.5
-                },
-                new Movie
-                {
-                    Id = "tt4881806",
-                    Titulo = "Jurassic World: Reino Ameaçado",
-                    Ano = 2018,
-                    Nota = 6.7
-                },
-                new Movie
-                {
-                    Id = "tt5164214",
-                    Titulo = "Oito Mulheres e um Segredo",
-                    Ano = 2018,
-                    Nota = 6.3
-                },
-                new Movie
-                {
-                    Id = "tt7784604",
-                    Titulo = "Hereditário",
-                    Ano = 2018,
-                    Nota = 7.8
-                },
-                new Movie
-                {
-                    Id = "tt4154756",
-                    Titulo = "Vingadores: Guerra Infinita",
-                    Ano = 2018,
-                    Nota = 8.8
-                },
-                new Movie
-                {
-                    Id = "tt5463162",
-                    Titulo = "Deadpool 2",
-                    Ano = 2018,
-                    Nota = 8.1
-                },
-                new Movie
-                {
-                    Id = "tt3778644",
-                    Titulo = "Han Solo: Uma História Star Wars",
-                    Ano = 2018,
-                    Nota = 7.2
-                },
-                new Movie
-                {
-                    Id = "tt3501632",
-                    Titulo = "Thor: Ragnarok",
-                    Ano = 2018,
-                    Nota = 7.9
-                }
-            };
-            var service = new MoviesWorldCupService(new HttpClient());
-            var moviesOrder = service.OrderMovies(movies);
-            var resultQuarterFinals = service.QuarterFinals(moviesOrder);
+            var moviesOrder = _service.OrderMovies(_movies);
+            var resultQuarterFinals = _service.QuarterFinals(moviesOrder);
 
             // Act
-            var result = service.SemiFinal(resultQuarterFinals);
+            var result = _service.SemiFinal(resultQuarterFinals);
 
             // Assert
             var m1 = result.FirstOrDefault(m => m.Id == "tt4154756");
-            var m2 = result.FirstOrDefault(m => m.Id == "tt3606756");
             Assert.NotNull(m1);
+            var m2 = result.FirstOrDefault(m => m.Id == "tt3606756");
             Assert.NotNull(m2);
         }
 
@@ -252,72 +142,12 @@ namespace CopaDoMundoDeFilmesTest
         public void GeneratedCup_Final()
         {
             // Arrange
-            List<Movie> movies = new List<Movie>
-            {
-                new Movie
-                {
-                    Id = "tt3606756",
-                    Titulo = "Os Incríveis 2",
-                    Ano = 2018,
-                    Nota = 8.5
-                },
-                new Movie
-                {
-                    Id = "tt4881806",
-                    Titulo = "Jurassic World: Reino Ameaçado",
-                    Ano = 2018,
-                    Nota = 6.7
-                },
-                new Movie
-                {
-                    Id = "tt5164214",
-                    Titulo = "Oito Mulheres e um Segredo",
-                    Ano = 2018,
-                    Nota = 6.3
-                },
-                new Movie
-                {
-                    Id = "tt7784604",
-                    Titulo = "Hereditário",
-                    Ano = 2018,
-                    Nota = 7.8
-                },
-                new Movie
-                {
-                    Id = "tt4154756",
-                    Titulo = "Vingadores: Guerra Infinita",
-                    Ano = 2018,
-                    Nota = 8.8
-                },
-                new Movie
-                {
-                    Id = "tt5463162",
-                    Titulo = "Deadpool 2",
-                    Ano = 2018,
-                    Nota = 8.1
-                },
-                new Movie
-                {
-                    Id = "tt3778644",
-                    Titulo = "Han Solo: Uma História Star Wars",
-                    Ano = 2018,
-                    Nota = 7.2
-                },
-                new Movie
-                {
-                    Id = "tt3501632",
-                    Titulo = "Thor: Ragnarok",
-                    Ano = 2018,
-                    Nota = 7.9
-                }
-            };
-            var service = new MoviesWorldCupService(new HttpClient());
-            var moviesOrder = service.OrderMovies(movies);
-            var resultQuarterFinals = service.QuarterFinals(moviesOrder);
-            var resultSemiFinal = service.SemiFinal(resultQuarterFinals);
+            var moviesOrder = _service.OrderMovies(_movies);
+            var resultQuarterFinals = _service.QuarterFinals(moviesOrder);
+            var resultSemiFinal = _service.SemiFinal(resultQuarterFinals);
 
             // Act
-            var result = service.Final(resultSemiFinal);
+            var result = _service.Final(resultSemiFinal);
 
             // Assert
             Assert.Equal("tt4154756", result[0].Id);
@@ -334,7 +164,6 @@ namespace CopaDoMundoDeFilmesTest
                 Ano = 2018,
                 Nota = 8.5
             };
-            
             var movie2 = new Movie
             {
                 Id = "tt4881806",
@@ -342,11 +171,9 @@ namespace CopaDoMundoDeFilmesTest
                 Ano = 2018,
                 Nota = 8.5
             };
-                
-            var service = new MoviesWorldCupService(new HttpClient());
 
             // Act
-            var result = service.Champion(movie1, movie2);
+            var result = _service.Champion(movie1, movie2);
 
             // Assert
             Assert.Equal("tt4881806", result.Id);
